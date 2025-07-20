@@ -11,14 +11,25 @@ export const uploadFile = async (file: File, dir?: string): Promise<FileSupaInfo
         .upload(path, file);
 
     if (error) throw error;
-    return {...data, name: file.name, url:  getPublicUrl(bucket, data.path) || ''};
+    return {
+        id: data.id,
+        path: data.fullPath, name: file.name,
+        url: getPublicUrl(bucket, data.path) || '',
+        hash: await hashFile(file)
+    } as FileSupaInfo;
 };
 
-const getPublicUrl = (bucket: string, path: string): string=> {
+const getPublicUrl = (bucket: string, path: string): string => {
 
-    const { data } =  supabase.storage
+    const { data } = supabase.storage
         .from(bucket)
         .getPublicUrl(path)
 
     return data.publicUrl
+}
+
+async function hashFile(file: File): Promise<string> {
+    const buffer = await file.arrayBuffer();
+    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
 }

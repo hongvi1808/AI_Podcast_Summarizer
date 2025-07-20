@@ -4,4 +4,5 @@ export interface FileSupaInfo {
     path: string;
     fullPath: string;
     url: string;
+    hash: string;
 }

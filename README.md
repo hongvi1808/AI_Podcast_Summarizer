@@ -9,7 +9,7 @@
 - $10-$20/month: Limit 30 podcast
 - Patner with podcast platforms
 
-# 3. Plan to build the real version with a team (assuming 4 members)
+# 3. Plan to build the real version with a team
   - Week 1: Setup backend, frontend project, basic UI, upload to storage
   - Week 2: Integrate Whisper API (for speech-to-text) and GPT (for summarier), store data into own's database
   - Week 3: Improve UI, error handling, loading states

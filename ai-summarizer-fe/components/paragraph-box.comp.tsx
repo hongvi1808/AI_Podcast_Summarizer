@@ -25,7 +25,7 @@ const ParagraphPaper: React.FC<ParagraphPaperProps> = ({ content, title = 'Bản
                 padding: 2,
                 borderRadius: 2,
                 backgroundColor: '#fefefe',
-                minHeight: 400,
+                minHeight: 300,
                 maxHeight: 800,
                 overflowY: 'auto',
                 whiteSpace: 'pre-line',

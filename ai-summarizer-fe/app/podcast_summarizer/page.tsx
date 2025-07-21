@@ -52,7 +52,7 @@ export default function PodcastSummarizerPage() {
                 </Container>
 
             </Stack>
-            <Box sx={{ padding: 4, textAlign: 'center' }}>
+            <Box sx={{ padding: 3, textAlign: 'center' }}>
                 <Typography variant="body1" color="text.secondary">
                     {'This is a simple online AI summarizer for podcasts. You can upload your podcast files and generate summaries easily.'}
                 </Typography>

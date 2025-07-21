@@ -42,6 +42,12 @@ $ yarn run start:dev
 
 # production mode
 $ yarn run start:prod
+
+# generate migrate db
+$ yarn migration:generate
+
+# run migrate db
+$ yarn migration:run
 ```
 
 ## Run tests

@@ -5,13 +5,15 @@ import { audioSumarizerApi } from "./services/gen-summary-service";
 import { FileSupaInfo } from "@/base/models/file.model";
 import { ButtonBase } from "@/components/buttons/button-base.comp";
 import BtnUploadAudio from "./component/btn-upload.comp";
+import SummaryBox from "@/components/paragraph-box.comp";
 import ParagraphPaper from "@/components/paragraph-box.comp";
 import { useState } from "react";
 
 export default function PodcastSummarizerPage() {
     //fetch data result summarizer
     const queryClient = useQueryClient();
-    const [paragraph, setParagraph] = useState<string>('');
+        const [paragraph, setParagraph] = useState<string>('');
+    
 
     const { mutate: mutateGen, isPending, isSuccess } = useMutation({
         mutationFn: audioSumarizerApi.gen,
@@ -20,7 +22,7 @@ export default function PodcastSummarizerPage() {
         },
         onSuccess: (data) => {
             queryClient.clear()
-            setParagraph(data.summary);
+            setParagraph(data.content);
             console.log('Summary generated successfully:', data);
         },
     });
@@ -38,17 +40,17 @@ export default function PodcastSummarizerPage() {
                 sx={{ minHeight: '40vh', backgroundColor: '#666666', paddingX: 2, paddingY: 6, color: 'white' }}
             >
                 <Typography variant="h4" color="white" >
-                    {'Online AI Podcast Summarizer Generator'}
+                    {'Online AI Podcast Transcript Generator'}
                 </Typography>
 
                 <BtnUploadAudio />
 
                 <Link onClick={handleGenerator} component={ButtonBase} color="#18FFFF">
-                    {'Generate Summarizer'}
+                    {'Generate transcript'}
                 </Link>
 
                 <Container maxWidth="lg" sx={{ marginTop: 4 }}>
-                    <ParagraphPaper title="Summary" content={paragraph} />
+                    <ParagraphPaper title="Transcript" content={paragraph} />
                 </Container>
 
             </Stack>

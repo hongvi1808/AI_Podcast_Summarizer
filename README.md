@@ -28,3 +28,6 @@
 ## BACKEND
 - Project name: ai-summarizer-be
 - Tech stack: Nest.js, TypeORM, Postgresql, Openai
+
+  <img width="1899" height="917" alt="image" src="https://github.com/user-attachments/assets/347bbcc2-2906-4805-818a-cb770a6fbfeb" />
+

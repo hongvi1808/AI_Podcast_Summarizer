@@ -9,14 +9,20 @@ export class SummaryEntity {
     @Column()
     title: string
 
+    @Column()
+    fileId: string;
+
     @ManyToOne(() => FileInfoEnity, podcast => podcast.transcripts)
-    file: FileInfoEnity;
+    file?: FileInfoEnity;
 
     @Column({ type: 'text' })
     summary: string;
 
-    @Column('created-at')
-    createdAt: string
+    @Column({ default: 'short' }) // 'short' | 'detailed' | 'bullet'
+    type?: string
+
+    @Column({ name: 'created-at', type: 'bigint', default: () => "EXTRACT(EPOCH FROM NOW()) * 1000" })
+    createdAt?: number
 
 
 }

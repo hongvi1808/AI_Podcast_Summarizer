@@ -1,20 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { TranscriptEntity } from 'src/base/database/entities/transcript.entity';
-import { Repository } from 'typeorm';
+import { Injectable, Logger } from '@nestjs/common';
+import { TranscriptRepo } from './transcript.repository';
+
+import { uuidv7 } from 'uuidv7';
+import { FilesService } from '../files/files.service';
+import { TranscriptDto } from './dto/transcript.dto';
+import { OpenaiService } from '../openai/openai.service';
 
 @Injectable()
 export class TranscriptService {
-    constructor(@InjectRepository(TranscriptEntity) private dbRepo: Repository<TranscriptEntity>) { }
-    
-    async genTranscript(body: any): Promise<any> {
-        // check db if summary exists -> return it
-       // transcript
-       // created file, transcript
-        return {
-        transcript: `Generated transcript for: ${body.text}`,
-        title: body.title || 'Default Title',
-        createdAt: new Date().toISOString(),
-        };
+    constructor(private readonly transcriptRepo: TranscriptRepo,
+        private readonly fileService: FilesService,
+        private readonly openaiService: OpenaiService,
+    ) { }
+
+    async genTranscript(body: TranscriptDto): Promise<any> {
+        const existedTrans = await this.transcriptRepo.getTranscriptByHashFile(body.file.hash);
+        if (existedTrans) return existedTrans;
+        const existedFile = await this.fileService.getFileByHash(body.file.hash);
+         if (!existedFile) await this.fileService.createFile({
+            id: body.file.id,
+            fileHash: body.file.hash,
+            url: body.file.url,
+            name: body.file.path,
+            path: body.file.fullPath,
+
+        });
+        // transcript
+        const trans = await this.openaiService.transcribeAudioFromUrl(body.file.url)
+        const title = await this.openaiService.generateTitle(trans)
+        // created file, transcript
+        const createdTranscript = await this.transcriptRepo.createTranscript({
+            id: uuidv7(),
+            content: trans,
+            fileId: body.file.id,
+            name: title,
+        }
+        );
+        return createdTranscript
     }
+
+
 }

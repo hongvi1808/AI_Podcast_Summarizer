@@ -9,14 +9,20 @@ export class TranscriptEntity {
     @Column()
     name: string
 
+    @Column()
+    fileId: string;
+
     @ManyToOne(() => FileInfoEnity, podcast => podcast.transcripts)
-    file: FileInfoEnity;
+    file?: FileInfoEnity;
 
     @Column({ type: 'text' })
     content: string;
 
-    @Column('created-at')
-    createdAt: string
+    @Column({ default: 'native' }) // vi, en, zh...
+    language?: string;
+
+    @Column({ name: 'created-at', type: 'bigint', default: () => "EXTRACT(EPOCH FROM NOW()) * 1000" })
+    createdAt?: number
 
 
 }

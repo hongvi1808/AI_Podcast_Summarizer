@@ -15,6 +15,7 @@ export const uploadFile = async (file: File, dir?: string): Promise<FileSupaInfo
         id: data.id,
         path: data.fullPath, name: file.name,
         url: getPublicUrl(bucket, data.path) || '',
+        fullPath: data.fullPath,
         hash: await hashFile(file)
     } as FileSupaInfo;
 };

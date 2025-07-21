@@ -16,20 +16,17 @@ export class FileInfoEnity {
     @Column()
     path: string
 
-    @Column()
-    type: string
-    
-    @Column({name: 'file-hash', unique: true }) 
+    @Column({ name: 'file-hash', unique: true })
     fileHash: string
 
-    @Column('created-at')
-    createdAt: number
+    @Column({ name: 'created-at', type: 'bigint', default: () => "EXTRACT(EPOCH FROM NOW()) * 1000" })
+    createdAt?: number
 
     @OneToMany(() => TranscriptEntity, transcript => transcript.file)
-    transcripts: TranscriptEntity[];
+    transcripts?: TranscriptEntity[];
 
     @OneToMany(() => SummaryEntity, summary => summary.file)
-    summaries: SummaryEntity[];
+    summaries?: SummaryEntity[];
 
 
 }

@@ -5,6 +5,6 @@ const urlDefault = 'summarizer';
 
 export const audioSumarizerApi = {
     gen: (data: FileSupaInfo) => {
-        return api.post(`${urlDefault}/generate`, data);
+        return api.post(`${urlDefault}/generate`, {file: data});
     }
 }

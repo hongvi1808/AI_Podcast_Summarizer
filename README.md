@@ -15,7 +15,7 @@
   - Week 3: Improve UI, error handling, loading states
   - Week 4: Deploy, optimzie performance, test
 
-# 4. The essential feature of this MVP
+# 4. The essential features of this MVP
 - Upload file: User upload audio to supabase storage
 - Speech to text: Whisper convert audio to transcript
 - Summarizer: GPT summarizes that text

@@ -29,5 +29,14 @@
 - Project name: ai-summarizer-be
 - Tech stack: Nest.js, TypeORM, Postgresql, Openai, RESTful API
 
+## Flow summarizer
+1. User upload audio file into Supabase storage
+2. Client send audio info (include in url, hash file...) to server
+3. Server check database whether the hash file exists, if so return
+4. Call Whisper API to transcript speech to text
+5. Continue summarizing that text using GPT
+6. Store transcript and summary into database
+7. Return and display result to user
+
   <img width="1899" height="917" alt="image" src="https://github.com/user-attachments/assets/347bbcc2-2906-4805-818a-cb770a6fbfeb" />
 

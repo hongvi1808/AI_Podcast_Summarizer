@@ -1,5 +1,14 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
+import { Roboto } from 'next/font/google';
+
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['100', '400', '700'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
 
 const theme = createTheme({
   palette: {
@@ -12,10 +21,10 @@ const theme = createTheme({
     },
     background: {
       default: '#ffffff', // màu nền
-    }, 
+    },
   },
-   typography: {
-    fontFamily: 'Roboto, sans-serif',
+  typography: {
+    fontFamily: roboto.style.fontFamily,
   },
   components: {
     MuiButton: {
@@ -23,7 +32,7 @@ const theme = createTheme({
         color: 'secondary', // màu chữ mặc định
       },
     },
-}
+  }
 });
 
 export default theme;

@@ -24,5 +24,5 @@ export default function BtnUploadAudio() {
         loading={isPending}
         size="large"
         title={(queryClient.getQueryData(['uploadedFile']) as FileSupaInfo)?.name || 'UPLOAD NEW AUDIO FILE'}
-        onFileChange={(file) => mutateUpload(file)} />;
+        onFileChange={(file) => {mutateUpload(file)}} />;
 }

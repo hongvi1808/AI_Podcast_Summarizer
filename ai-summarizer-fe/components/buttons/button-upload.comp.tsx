@@ -25,7 +25,7 @@ export function ButtonUpload(props: IButtonUploadProps) {
                 onChange={(e) => handleFileChange(e)}
             />
             <label htmlFor={props.id || 'upload-file'}>
-                <ButtonBase variant="contained" component="span" color="primary" {...props}>
+                <ButtonBase variant="contained" component="span" color="primary" loading={props.loading}>
                     {props.title || 'Upload File'}
                 </ButtonBase>
             </label>
